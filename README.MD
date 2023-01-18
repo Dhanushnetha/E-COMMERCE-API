@@ -1,3 +1,3 @@
 ## Hosted Project
 
-[E-Commerce API Heroku URL](https://e-commerce-api-10.herokuapp.com/)
+[E-Commerce API Render URL](https://e-commerce-api-3qtf.onrender.com/)

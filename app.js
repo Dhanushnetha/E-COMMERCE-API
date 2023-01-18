@@ -11,6 +11,10 @@ const helmet = require('helmet')
 const xss = require('xss-clean')
 const cors = require('cors')
 const mongoSanitize = require('express-mongo-sanitize');
+const swaggerUI = require('swagger-ui-express')
+const YAML = require('yamljs')
+const swaggerDocument = YAML.load('./swagger.yaml')
+
 
 app.set('trust proxy', 1);
 app.use(rateLimiter({
@@ -18,6 +22,7 @@ app.use(rateLimiter({
     max: 60 
 }));
 
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 app.use(helmet());
 app.use(cors());
 app.use(xss());
@@ -44,9 +49,9 @@ const orderRouter = require('./routes/orderRouter')
 
 const port = process.env.PORT || 3000;
 
-// app.get('/', (req, res)=>{
-//     res.send('E-COMMERCE-API');
-// })
+app.get('/', (req, res)=>{
+    res.send('<h1>E-COMMERCE-API</h1><a href="/api-docs">Documentation</a>');
+})
 
 // app.get('/api/v1', (req, res)=>{
 //     console.log(req.signedCookies);
